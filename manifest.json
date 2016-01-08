@@ -2,10 +2,7 @@
   "name": "Torpedo",
   "version": "0.0.1",
   "description": "I work at the guardian",
-  "icons": { "32": "favicon32.ico",
-           "48": "favicon48.ico",
-          "64": "favicon64.ico" },
-
+  "icons": { "48": "torpedo.png"},
   "permissions": [
     "chrome://favicon/",
     "sessions",
@@ -13,11 +10,12 @@
     "storage"
   ],
   "background": {
-    "scripts": ["guardian.js"]
+    "scripts": ["background.js"]
   },
   "content_scripts": [{
     "matches": ["<all_urls>"],
-    "js": ["content.js"]
+    "js": ["jquery-2.1.4.js", "highlight.js", "content.js"],
+    "css": ["content.css"]
 }],
   "browser_action": {
       "default_title": "Torpedo"

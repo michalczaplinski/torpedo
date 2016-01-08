@@ -1,9 +1,28 @@
 // Listen for messages
-chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-    // If the received message has the expected format...
-    if (msg.text === 'report_back') {
-        // Call the specified callback, passing
-        // the web-page's DOM content as argument
-        sendResponse(document.documentElement.innerHTML);
+
+var state = {
+  highlighted: false
+}
+
+function highlightWords(words, page) {
+  $(page).unhighlight();
+  for (var word in words) {
+    if (words.hasOwnProperty(word)) {
+      console.log(word);
+      $(page).highlight(word);
     }
+  }
+}
+
+chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+
+  if (state.highlighted) {
+    $(document.documentElement).unhighlight();
+  } else {
+    highlightWords(msg, document.documentElement)
+  }
+
+  state.highlighted = !state.highlighted;
+  console.log(state.highlighted);
+
 });

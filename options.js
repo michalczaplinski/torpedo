@@ -47,8 +47,9 @@ $(document).ready( function() {
 
   $('#my-form').submit(function(e) {
       e.preventDefault();
-      var item = $(this).children('input').val();
-      saveItem(item);
+      var item = $(this).children('input');
+      saveItem(item.val());
+      item.val('')
   });
 
   showItems();
